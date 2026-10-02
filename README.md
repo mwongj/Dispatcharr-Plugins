@@ -14,7 +14,7 @@ The GitHub repository page is not the JSON feed. Keep the official catalogue ena
 
 | Plugin | Source | Initial release |
 | --- | --- | --- |
-| VOD to Media Library | [mwongj/VOD2MLIB](https://github.com/mwongj/VOD2MLIB) | `1.18.1-rc.1` — native category selection, for testing |
+| VOD to Media Library | [mwongj/VOD2MLIB](https://github.com/mwongj/VOD2MLIB) | `1.18.1-rc.2` — native category selection, for testing |
 
 The initial VOD2MLIB package comes from the reviewed PR #1 commit, not the fork's current main branch. Its source SHA is recorded in the definition, feed, and release notes. The release version is written into the packaged manifest and Python class without changing the source fork's release metadata. Original author and license information are retained.
 

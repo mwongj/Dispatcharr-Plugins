@@ -4,10 +4,12 @@ from pathlib import Path
 import sys
 import tarfile
 import unittest
+from unittest.mock import MagicMock, patch
+from urllib.error import HTTPError
 import zipfile
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
-from publish import build_package, validate_definition
+from publish import build_package, download, validate_definition
 
 
 def source_archive():
@@ -71,6 +73,13 @@ class TestPackages(unittest.TestCase):
         for name in ("../secret", "/secret", "folder/../secret", "folder\\secret"):
             with self.subTest(name=name), self.assertRaises(ValueError):
                 validate_definition({**self.definition, "files": ["plugin.py", "plugin.json", name]})
+
+    def test_download_retries_new_release_asset_404(self):
+        response = MagicMock()
+        response.__enter__.return_value.read.return_value = b"package"
+        with patch("publish.urlopen", side_effect=[HTTPError("https://github.com/asset", 404, "Not Found", {}, None), response]) as request, patch("publish.time.sleep"):
+            self.assertEqual(download("https://github.com/asset"), b"package")
+            self.assertEqual(request.call_count, 2)
 
 
 if __name__ == "__main__":

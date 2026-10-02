@@ -14,6 +14,7 @@ from pathlib import Path, PurePosixPath
 import re
 import subprocess
 import tarfile
+import time
 from urllib.error import HTTPError
 from urllib.parse import quote
 from urllib.request import Request, urlopen
@@ -24,6 +25,18 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def encode_json(value):
     return (json.dumps(value, indent=2, ensure_ascii=False) + "\n").encode()
+
+
+def download(url, attempts=6):
+    # New release assets can briefly return 404 while GitHub propagates them.
+    for attempt in range(attempts):
+        try:
+            with urlopen(Request(url, headers={"User-Agent": "mwongj-plugin-publisher"}), timeout=120) as response:
+                return response.read()
+        except HTTPError as error:
+            if error.code not in (404, 500, 502, 503) or attempt == attempts - 1:
+                raise
+            time.sleep(2)
 
 
 def github_token():
@@ -116,17 +129,17 @@ def build_package(definition, archive):
     metadata["version"] = definition["version"]
     metadata["repo_url"] = "https://github.com/" + definition["source_repository"]
     metadata["help_url"] = metadata["repo_url"] + "#readme"
-    contents["plugin.json"] = encode_json(metadata)
     contents["plugin.py"] = set_plugin_attribute(contents["plugin.py"], "version", definition["version"])
     if definition.get("display_name"):
         metadata["name"] = definition["display_name"]
         contents["plugin.py"] = set_plugin_attribute(contents["plugin.py"], "name", definition["display_name"])
     contents["plugin.json"] = encode_json(metadata)
     package = io.BytesIO()
-    with zipfile.ZipFile(package, "w", compression=zipfile.ZIP_DEFLATED) as output:
+    # Store files to keep package checksums stable across zlib implementations.
+    with zipfile.ZipFile(package, "w", compression=zipfile.ZIP_STORED) as output:
         for name, data in sorted(contents.items()):
             entry = zipfile.ZipInfo(definition["slug"] + "/" + name, date_time=(1980, 1, 1, 0, 0, 0))
-            entry.compress_type = zipfile.ZIP_DEFLATED
+            entry.compress_type = zipfile.ZIP_STORED
             entry.external_attr = 0o100644 << 16
             output.writestr(entry, data)
     return package.getvalue(), metadata, contents
@@ -190,8 +203,7 @@ def main():
             raise ValueError("Definition filename must match slug")
         slug, version = definition["slug"], definition["version"]
         source_url = f"https://codeload.github.com/{definition['source_repository']}/tar.gz/{definition['source_commit']}"
-        with urlopen(source_url, timeout=120) as response:
-            source_archive = response.read()
+        source_archive = download(source_url)
         package, metadata, contents = build_package(definition, source_archive)
         checksum = hashlib.sha256(package).hexdigest()
         tag = f"{slug}-{version}"
@@ -219,9 +231,8 @@ def main():
             raise ValueError("Version already exists with different package bytes; bump version")
         if release["draft"]:
             release = api.request(release_path + "/" + str(release["id"]), {"draft": False}, method="PATCH")
-        with urlopen(asset["browser_download_url"], timeout=120) as response:
-            if hashlib.sha256(response.read()).hexdigest() != checksum:
-                raise ValueError("Published ZIP checksum does not match")
+        if hashlib.sha256(download(asset["browser_download_url"])).hexdigest() != checksum:
+            raise ValueError("Published ZIP checksum does not match")
         relative_url = f"{tag}/{asset_name}"
         entry = {
             "version": version, "commit_sha": definition["source_commit"],
