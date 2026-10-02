@@ -2,9 +2,20 @@
   "slug": "vod2mlib",
   "display_name": "VOD to Media Library (mwongj fork)",
   "source_repository": "mwongj/VOD2MLIB",
-  "source_commit": "af1323f4912835e3346d0804d9492de4a7433052",
-  "version": "1.18.1",
-  "prerelease": false,
-  "release_notes": "Stable release of mwongj/VOD2MLIB PR #1, merged into main. Scan and both generators use native Dispatcharr category enablement for the same active M3U account and VOD type. Removes legacy plugin Category Filter/Exclude settings. Live movie validation: all 16,812 movie STRM/NFO pairs matched expected eligible content, with 31 duplicate relations skipped and zero generation errors. Series uses the shared eligibility helper and passed model-backed integration checks; live series generation was not exercised. Source commit: af1323f4912835e3346d0804d9492de4a7433052.",
-  "files": ["plugin.py", "plugin.json", "__init__.py", "requirements.txt", "LICENSE", "README.md", "logo.png"]
+  "source_commit": "fd3a52a7a5293dfb58909e3ec4189e576b39490f",
+  "version": "1.19.0-rc.1",
+  "prerelease": true,
+  "release_notes": "Prerelease from https://github.com/mwongj/VOD2MLIB/pull/2 (source PR remains open). Adds optional Emby duplicate prevention and cleanup, whole-show or missing-episode TV handling, selected libraries, failure policies, and optional immediate M3U-removal cleanup. Uses a persistent local SQLite ownership inventory, 1,000-record bulk transactions, bounded workers and process locking. STRMs are verified by raw URL equality; generated NFO hashes preserve metadata edits. Integration and M3U cleanup default off, deletion defaults to STRMs only. Includes conservative legacy adoption, cleanup preview/library discovery actions, scheduler settings and documentation. Preserves PR #1 native Dispatcharr category selection. Validation: 272 local tests passed with one Windows symlink test skipped; Python 3.10/3.12 Linux CI passed. Publisher tests and dry-run package/import checks passed. No live Emby smoke test or scale benchmark was performed.",
+  "files": [
+    "plugin.py",
+    "plugin.json",
+    "__init__.py",
+    "requirements.txt",
+    "LICENSE",
+    "README.md",
+    "logo.png",
+    "inventory.py",
+    "media_library.py",
+    "reconciliation.py"
+  ]
 }
