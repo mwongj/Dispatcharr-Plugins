@@ -40,6 +40,7 @@ class TestPackages(unittest.TestCase):
         with zipfile.ZipFile(io.BytesIO(package)) as archive:
             self.assertEqual(set(archive.namelist()), {"example/plugin.py", "example/plugin.json", "example/LICENSE"})
             self.assertIsNone(archive.testzip())
+            self.assertTrue(all(entry.create_system == 3 for entry in archive.infolist()))
         namespace = {}
         exec(contents["plugin.py"], namespace)
         self.assertEqual(namespace["Plugin"].version, self.definition["version"])

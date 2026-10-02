@@ -139,6 +139,7 @@ def build_package(definition, archive):
     with zipfile.ZipFile(package, "w", compression=zipfile.ZIP_STORED) as output:
         for name, data in sorted(contents.items()):
             entry = zipfile.ZipInfo(definition["slug"] + "/" + name, date_time=(1980, 1, 1, 0, 0, 0))
+            entry.create_system = 3
             entry.compress_type = zipfile.ZIP_STORED
             entry.external_attr = 0o100644 << 16
             output.writestr(entry, data)
@@ -231,6 +232,8 @@ def main():
             raise ValueError("Version already exists with different package bytes; bump version")
         if release["draft"]:
             release = api.request(release_path + "/" + str(release["id"]), {"draft": False}, method="PATCH")
+            # A draft asset's URL may contain an untagged temporary release ID.
+            asset = next(item for item in release["assets"] if item["name"] == asset_name)
         if hashlib.sha256(download(asset["browser_download_url"])).hexdigest() != checksum:
             raise ValueError("Published ZIP checksum does not match")
         relative_url = f"{tag}/{asset_name}"
