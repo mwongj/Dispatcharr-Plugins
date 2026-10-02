@@ -12,11 +12,11 @@ The GitHub repository page is not the JSON feed. Keep the official catalogue ena
 
 ## Plugins
 
-| Plugin | Source | Initial release |
+| Plugin | Source | Current release |
 | --- | --- | --- |
-| VOD to Media Library | [mwongj/VOD2MLIB](https://github.com/mwongj/VOD2MLIB) | `1.18.1-rc.2` — native category selection, for testing |
+| VOD to Media Library | [mwongj/VOD2MLIB](https://github.com/mwongj/VOD2MLIB) | `1.18.1` — stable native category selection |
 
-The initial VOD2MLIB package comes from the reviewed PR #1 commit, not the fork's current main branch. Its source SHA is recorded in the definition, feed, and release notes. The release version is written into the packaged manifest and Python class without changing the source fork's release metadata. Original author and license information are retained.
+The stable VOD2MLIB package is pinned to the commit that merged PR #1 into the fork's main branch. Its source SHA is recorded in the definition, feed, and release notes. The release version is written into the packaged manifest and Python class without changing the source fork's release metadata. Original author and license information are retained.
 
 VOD2MLIB keeps the identifier **`vod2mlib`** and displays **VOD to Media Library (mwongj fork)**. Install this repository's version over the existing plugin to switch its managed source while keeping the existing settings. It is one installation, so upstream and this fork cannot run as separate plugins. Scheduled tasks keep the existing identities.
 
@@ -45,4 +45,4 @@ ZIPs are written to `dist/`. Publishing locally uses `GH_TOKEN` / `GITHUB_TOKEN`
 
 This is an independent feed named **mwongj Plugin Forks**. Its manifests are unsigned; Dispatcharr reports them as unverified. SHA256 checks detect mismatched downloads but are not signatures.
 
-The initial release is a prerelease. Dispatcharr's current implementation suppresses ordinary update notifications for installations marked as prereleases; choose a stable version explicitly when testing is complete.
+Earlier VOD2MLIB test releases remain available in the version history. Dispatcharr's current implementation suppresses ordinary update notifications for installations marked as prereleases; refresh this repository and explicitly select stable `1.18.1` when moving from `1.18.1-rc.2`.

@@ -2,9 +2,9 @@
   "slug": "vod2mlib",
   "display_name": "VOD to Media Library (mwongj fork)",
   "source_repository": "mwongj/VOD2MLIB",
-  "source_commit": "2fbfdc77576b40362ee340172821b89e3a029841",
-  "version": "1.18.1-rc.2",
-  "prerelease": true,
-  "release_notes": "Test release of the native Dispatcharr VOD category selection changes in mwongj/VOD2MLIB PR #1. Removes legacy plugin Category Filter/Exclude settings. Source commit: 2fbfdc77576b40362ee340172821b89e3a029841.",
+  "source_commit": "af1323f4912835e3346d0804d9492de4a7433052",
+  "version": "1.18.1",
+  "prerelease": false,
+  "release_notes": "Stable release of mwongj/VOD2MLIB PR #1, merged into main. Scan and both generators use native Dispatcharr category enablement for the same active M3U account and VOD type. Removes legacy plugin Category Filter/Exclude settings. Live movie validation: all 16,812 movie STRM/NFO pairs matched expected eligible content, with 31 duplicate relations skipped and zero generation errors. Series uses the shared eligibility helper and passed model-backed integration checks; live series generation was not exercised. Source commit: af1323f4912835e3346d0804d9492de4a7433052.",
   "files": ["plugin.py", "plugin.json", "__init__.py", "requirements.txt", "LICENSE", "README.md", "logo.png"]
 }
