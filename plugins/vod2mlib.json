@@ -2,10 +2,10 @@
   "slug": "vod2mlib",
   "display_name": "VOD to Media Library (mwongj fork)",
   "source_repository": "mwongj/VOD2MLIB",
-  "source_commit": "113d472183095fd3ec233e7bf4026dacca0298cd",
-  "version": "1.19.0-rc.4",
+  "source_commit": "b0f7c1b01ed8b53238b1a1bfc904b1d871816b6d",
+  "version": "1.19.0-rc.5",
   "prerelease": true,
-  "release_notes": "Prerelease from https://github.com/mwongj/VOD2MLIB/pull/2 (source PR remains open). Runs long plugin actions in isolated background processes with a configurable 30-minute default deadline enforced by a separate supervisor. Adds [ACTION] Status and Stop running action; cancellation terminates the plugin worker group and releases locks without recycling Dispatcharr web or stream workers. Scheduled actions use the same deadline. M3U cleanup refreshes provider episodes only for shows with generated output, after legacy adoption, while checking the complete catalogue independently of categories and generation batches. Retains rc.2 settings descriptions, native category selection, bulk SQLite writes, raw STRM URL comparisons and edited NFO protection. Adds live phase/item-count progress, elapsed time and remaining deadline to Action status, and uses direct indexed tracked-show lookups. Includes process cancellation, deadline, descendant termination, lock-release, overlap, stale-PID and settings privacy tests.",
+  "release_notes": "Prerelease from https://github.com/mwongj/VOD2MLIB/pull/2 (source PR remains open). Runs long plugin actions in isolated background processes with a configurable 30-minute default deadline enforced by a separate supervisor. Adds [ACTION] Status and Stop running action; cancellation terminates the plugin worker group and releases locks without recycling Dispatcharr web or stream workers. Scheduled actions use the same deadline. M3U cleanup refreshes provider episodes only for shows with generated output, after legacy adoption, while checking the complete catalogue independently of categories and generation batches. Retains rc.2 settings descriptions, native category selection, bulk SQLite writes, raw STRM URL comparisons and edited NFO protection. Fetches up to 2,000 Emby items per page to reduce request overhead while retaining complete-snapshot validation and bounded memory/timeouts. Adds live phase/item-count progress, elapsed time and remaining deadline to Action status, and uses direct indexed tracked-show lookups. Includes process cancellation, deadline, descendant termination, lock-release, overlap, stale-PID and settings privacy tests.",
   "files": [
     "plugin.py",
     "plugin.json",
