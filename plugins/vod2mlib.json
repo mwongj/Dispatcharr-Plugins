@@ -2,10 +2,10 @@
   "slug": "vod2mlib",
   "display_name": "VOD to Media Library (mwongj fork)",
   "source_repository": "mwongj/VOD2MLIB",
-  "source_commit": "fd3a52a7a5293dfb58909e3ec4189e576b39490f",
-  "version": "1.19.0-rc.1",
+  "source_commit": "f9359753cf83e8eaf59509d2ce843c2cb8233c88",
+  "version": "1.19.0-rc.2",
   "prerelease": true,
-  "release_notes": "Prerelease from https://github.com/mwongj/VOD2MLIB/pull/2 (source PR remains open). Adds optional Emby duplicate prevention and cleanup, whole-show or missing-episode TV handling, selected libraries, failure policies, and optional immediate M3U-removal cleanup. Uses a persistent local SQLite ownership inventory, 1,000-record bulk transactions, bounded workers and process locking. STRMs are verified by raw URL equality; generated NFO hashes preserve metadata edits. Integration and M3U cleanup default off, deletion defaults to STRMs only. Includes conservative legacy adoption, cleanup preview/library discovery actions, scheduler settings and documentation. Preserves PR #1 native Dispatcharr category selection. Validation: 272 local tests passed with one Windows symlink test skipped; Python 3.10/3.12 Linux CI passed. Publisher tests and dry-run package/import checks passed. No live Emby smoke test or scale benchmark was performed.",
+  "release_notes": "Prerelease from https://github.com/mwongj/VOD2MLIB/pull/2 (source PR remains open). Fixes the settings form: all reconciliation fields are appended after existing settings under [MEDIA LIBRARY & CLEANUP], followed by a short section description. Adds help text for all 12 new fields, including TV handling, server-check failure, duplicate cleanup, M3U removals and timing, and deletion scope. Explains option behavior and what files are preserved. Runtime and manifest definitions agree. Retains rc.1 reconciliation behavior, native Dispatcharr category selection, 1,000-record SQLite bulk writes, raw URL comparisons for STRMs, and hashes for optional unedited NFO cleanup. Validation: 272 local tests passed with one Windows symlink test skipped; Python 3.10/3.12 Linux CI, package/import and publisher checks passed.",
   "files": [
     "plugin.py",
     "plugin.json",
