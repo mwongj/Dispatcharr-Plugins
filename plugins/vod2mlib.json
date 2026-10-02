@@ -2,10 +2,10 @@
   "slug": "vod2mlib",
   "display_name": "VOD to Media Library (mwongj fork)",
   "source_repository": "mwongj/VOD2MLIB",
-  "source_commit": "033353e2de408f13b89cbe87bf899795f9625278",
-  "version": "1.19.0-rc.6",
+  "source_commit": "0349fef239a83f00030d52d54fe469ca28d22631",
+  "version": "1.19.0-rc.7",
   "prerelease": true,
-  "release_notes": "Prerelease from https://github.com/mwongj/VOD2MLIB/pull/2 (source PR remains open). Runs long actions in isolated background processes with a configurable 30-minute default deadline, Action status with progress/results, and Stop running action that terminates the plugin worker group. Scheduled actions use the same controls; supervisor metadata failures also stop workers. Uses lean global Emby /Items bulk listings: ProviderIds and Path, up to 20,000 items per page, no MediaSources playback detail, and total counts checked only at the beginning/end. Keeps incomplete/repeated/changed snapshot guards and file-version matching. Complete Django catalogue queries project required columns, omit unused account joins, and avoid a second census unless a tracked show was refreshed. Retains native categories, SQLite bulk writes, raw STRM URL equality, edited NFO protection, settings help and scheduled snapshots. Live verification: 222,190 Emby items in 48 seconds; 627,500 catalogue rows in 95 seconds with three Django queries; earlier cleanup removed 807 STRMs with zero errors/warnings and preserved NFOs. Validation: 283 local tests passed with three Windows platform-specific skips, publisher/package/import checks passed.",
+  "release_notes": "Prerelease from https://github.com/mwongj/VOD2MLIB/pull/2 (source PR remains open). Requires explicit library names or IDs, resolved case-insensitively with surrounding whitespace trimmed on every run; recreated libraries with the same name use their new ID. Removes All libraries and prevents empty, missing or ambiguous selections from continuing. Uses streamed catalogue tuples and bounded caches instead of repeated Django model construction and episode identity cleaning. Live measurements: complete 627,500-row catalogue processing improved from 95 to 61 seconds; selected real-media Emby libraries fetched in 2.5 seconds instead of 48 seconds for all libraries. Retains complete-catalogue cleanup, SQLite bulk writes, ownership checks, edited NFO protection, supervised deadlines/cancellation, settings help and scheduled snapshots. Validation: 294 local tests passed with three Windows platform skips; publisher and package checks passed.",
   "files": [
     "plugin.py",
     "plugin.json",
