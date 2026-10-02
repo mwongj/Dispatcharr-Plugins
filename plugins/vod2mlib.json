@@ -1,0 +1,10 @@
+{
+  "slug": "vod2mlib",
+  "display_name": "VOD to Media Library (mwongj fork)",
+  "source_repository": "mwongj/VOD2MLIB",
+  "source_commit": "2fbfdc77576b40362ee340172821b89e3a029841",
+  "version": "1.18.1-rc.1",
+  "prerelease": true,
+  "release_notes": "Test release of the native Dispatcharr VOD category selection changes in mwongj/VOD2MLIB PR #1. Removes legacy plugin Category Filter/Exclude settings. Source commit: 2fbfdc77576b40362ee340172821b89e3a029841.",
+  "files": ["plugin.py", "plugin.json", "__init__.py", "requirements.txt", "LICENSE", "README.md", "logo.png"]
+}

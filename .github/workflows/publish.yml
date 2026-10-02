@@ -1,0 +1,35 @@
+name: Publish plugin forks
+
+on:
+  workflow_dispatch:
+    inputs:
+      plugin:
+        description: Plugin slug, or leave blank to publish all definitions
+        required: false
+        type: string
+  push:
+    branches: [main]
+    paths: ['plugins/*.json']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-plugin-forks
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Test publisher
+        run: python -m unittest discover -s tests -v
+      - name: Build releases and update feed
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PLUGIN_SLUG: ${{ inputs.plugin }}
+        run: python scripts/publish.py --plugin "$PLUGIN_SLUG"
