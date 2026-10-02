@@ -2,10 +2,10 @@
   "slug": "vod2mlib",
   "display_name": "VOD to Media Library (mwongj fork)",
   "source_repository": "mwongj/VOD2MLIB",
-  "source_commit": "0349fef239a83f00030d52d54fe469ca28d22631",
-  "version": "1.19.0-rc.7",
+  "source_commit": "19e8acdf6599a5ffc350baca6fd67cc42003520d",
+  "version": "1.19.0-rc.8",
   "prerelease": true,
-  "release_notes": "Prerelease from https://github.com/mwongj/VOD2MLIB/pull/2 (source PR remains open). Requires explicit library names or IDs, resolved case-insensitively with surrounding whitespace trimmed on every run; recreated libraries with the same name use their new ID. Removes All libraries and prevents empty, missing or ambiguous selections from continuing. Uses streamed catalogue tuples and bounded caches instead of repeated Django model construction and episode identity cleaning. Live measurements: complete 627,500-row catalogue processing improved from 95 to 61 seconds; selected real-media Emby libraries fetched in 2.5 seconds instead of 48 seconds for all libraries. Retains complete-catalogue cleanup, SQLite bulk writes, ownership checks, edited NFO protection, supervised deadlines/cancellation, settings help and scheduled snapshots. Validation: 294 local tests passed with three Windows platform skips; publisher and package checks passed.",
+  "release_notes": "Prerelease from https://github.com/mwongj/VOD2MLIB/pull/2 (source PR remains open). Adds local action timing telemetry: wall and worker CPU seconds, batch/row counts and worker PID in action results, a completion summary in Action status, and a private latest timings.json in persistent state. No external telemetry, credentials or paths are recorded. Builds the temporary catalogue lookup index once after loading; uses a bounded 32 MiB temporary SQLite page cache while retaining disk-backed tables and persistent durability. Uses symlink-skipping directory-entry discovery, avoids non-candidate preview existence checks, and skips provider-show selection when no generated episodes are tracked. Complete catalogue/M3U absence and verified deletion rules remain intact. Live measured preview improved from 87 to 31 seconds with zero errors/warnings: complete 627,500-row catalogue 19 seconds, discovery 9.6 seconds, Emby 2.2 seconds, preview checks 0.4 seconds. Explicit names/IDs, normalization, cancellation/deadlines and native categories retained. Validation: 299 local tests passed with four Windows platform skips; publisher/package checks passed.",
   "files": [
     "plugin.py",
     "plugin.json",
