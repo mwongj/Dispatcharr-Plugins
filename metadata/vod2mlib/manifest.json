@@ -9,16 +9,26 @@
     "registry_url": "https://github.com/mwongj/Dispatcharr-Plugins",
     "registry_name": "mwongj Plugin Forks",
     "latest": {
-      "version": "1.19.0-rc.3",
-      "commit_sha": "a54f4468b268286c1d60ae410d5d5e29a0b5cd6c",
-      "url": "vod2mlib-1.19.0-rc.3/vod2mlib-1.19.0-rc.3.zip",
-      "latest_url": "vod2mlib-1.19.0-rc.3/vod2mlib-1.19.0-rc.3.zip",
-      "checksum_sha256": "1888c02c7100ff5e8a26f9fafbc0d8e9626d3246cec0214069d926792891b7de",
-      "size": 330,
+      "version": "1.19.0-rc.4",
+      "commit_sha": "113d472183095fd3ec233e7bf4026dacca0298cd",
+      "url": "vod2mlib-1.19.0-rc.4/vod2mlib-1.19.0-rc.4.zip",
+      "latest_url": "vod2mlib-1.19.0-rc.4/vod2mlib-1.19.0-rc.4.zip",
+      "checksum_sha256": "449ca106d6c7b8b9288e27ccff5a6fde838fa094101d5608d20050e6ac9bb036",
+      "size": 332,
       "prerelease": true,
       "min_dispatcharr_version": "v0.24.0"
     },
     "versions": [
+      {
+        "version": "1.19.0-rc.4",
+        "commit_sha": "113d472183095fd3ec233e7bf4026dacca0298cd",
+        "url": "vod2mlib-1.19.0-rc.4/vod2mlib-1.19.0-rc.4.zip",
+        "latest_url": "vod2mlib-1.19.0-rc.4/vod2mlib-1.19.0-rc.4.zip",
+        "checksum_sha256": "449ca106d6c7b8b9288e27ccff5a6fde838fa094101d5608d20050e6ac9bb036",
+        "size": 332,
+        "prerelease": true,
+        "min_dispatcharr_version": "v0.24.0"
+      },
       {
         "version": "1.19.0-rc.3",
         "commit_sha": "a54f4468b268286c1d60ae410d5d5e29a0b5cd6c",
