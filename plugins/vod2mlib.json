@@ -2,10 +2,10 @@
   "slug": "vod2mlib",
   "display_name": "VOD to Media Library (mwongj fork)",
   "source_repository": "mwongj/VOD2MLIB",
-  "source_commit": "53c5c0c7dfc215aac55f7e0c2763ccc3a93c119d",
-  "version": "1.20.0",
+  "source_commit": "33858bff67e2fba5dbbddf69bc5e04eda326f33a",
+  "version": "1.20.1",
   "prerelease": false,
-  "release_notes": "Stable release of merged mwongj/VOD2MLIB PR #3. Independent movie and series metadata filters, title regex filters, safe removal of managed output excluded by current filters, current filters for schedules, finer timing telemetry, and faster cleanup. Generation and cleanup use only Dispatcharr database metadata and episodes; no provider fetching or native metadata updates. Verified 417 tests passed, 4 platform skips. Full actual-path validation: series 31 seconds, movies 10 seconds, zero errors or file changes. Restores mwongj fork identity and documentation links.",
+  "release_notes": "Stable release of merged mwongj/VOD2MLIB PR #4. Manual and scheduled actions now use one current saved configuration. Save applies cron and timezone changes, with an Enable Auto-Rescan toggle for scheduled or manual-only use. Invalid enabled schedules are rejected before saving. Apply and Unschedule actions are removed. Existing schedules retain their enabled state; new installations default off. Plugin-owned save hooks implement scheduling without Dispatcharr source changes. Validation: 417 tests passed, 4 platform skips, including real Django/beat save, validation, toggle, upgrade, rollback, and queued-tick behavior. README and fork changelog reviewed against all 42 post-fork commits; install links, current behavior, inventory/performance, telemetry, scheduling and contributor instructions updated.",
   "files": [
     "plugin.py",
     "plugin.json",
@@ -20,6 +20,8 @@
     "inventory.py",
     "media_library.py",
     "metadata_filters.py",
-    "reconciliation.py"
+    "reconciliation.py",
+    "schedule_settings.py",
+    "CHANGELOG.md"
   ]
 }
