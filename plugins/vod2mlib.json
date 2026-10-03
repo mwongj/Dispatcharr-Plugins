@@ -2,10 +2,10 @@
   "slug": "vod2mlib",
   "display_name": "VOD to Media Library (mwongj fork)",
   "source_repository": "mwongj/VOD2MLIB",
-  "source_commit": "d1135e70bd429f7929b4c6f689f3b9271edaf697",
-  "version": "1.19.0-rc.10",
+  "source_commit": "40c73d5b21f659a492ce1f3b3d55f3d7cfea5cd2",
+  "version": "1.19.0-rc.11",
   "prerelease": true,
-  "release_notes": "Prerelease from https://github.com/mwongj/VOD2MLIB/pull/2 (source PR remains open). Optimizes routine M3U-removal checks with a complete source-only census: streamed account/provider IDs and direct show membership keys, without title cleaning, identity serialization, metadata table writes or lookup-index builds. Initial discovery and Rebuild / discover inventory retain full metadata. Rechecks after provider episode refresh use sources only. Skips the census entirely when M3U checks are not due and no roots need discovery. Preserves category/batch-independent completeness, stable source keys, account-specific orphan-show handling, failure guards, ownership/NFO protection, schema-2 discovery markers, standard-library portability and timing telemetry. Failed forced root checks invalidate discovery markers. Live-data parity verified all 627,666 source identities match the full census, with three Django queries each; source census reduced from about 17 to 8.2 seconds and preview to 10.4 seconds with zero errors/warnings. Validation: 312 local tests passed with four Windows platform skips; publisher/package/import checks passed.",
+  "release_notes": "Prerelease from https://github.com/mwongj/VOD2MLIB/pull/2 (source PR remains open). Adds persistent incremental generation decisions in SQLite schema 3. Movie runs compare streamed eligible source/metadata/settings/ownership projections and only hydrate new or changed candidates; unchanged output is authoritative in inventory and avoids per-file filesystem checks. Existing verified inventory seeds decisions without re-reading every STRM. Plugin deletions invalidate decisions; Rebuild / discover inventory handles external additions/edits/removals and resets decisions. TV episode output skips unchanged STRMs while preserving required on-demand provider refreshes. Raw URLs, native category eligibility, bounded batches/queues, complete M3U-removal checks, edited NFO/ownership protection and worker deadlines/cancellation remain intact. Includes generation_cache.py and new candidate timing counters. Validation: 321 plugin tests passed with four Windows skips; publisher/package tests passed. Live supervised movie validation: initial seeding 4.6s, unchanged runs 3.7-3.8s, ten changed movies 3.8s versus approximately 20-21s previously, with exact file and inventory verification. Timings exclude upstream M3U sync and Emby import; full rescans retain M3U census and TV provider costs.",
   "files": [
     "plugin.py",
     "plugin.json",
@@ -17,6 +17,7 @@
     "inventory.py",
     "media_library.py",
     "reconciliation.py",
-    "action_runner.py"
+    "action_runner.py",
+    "generation_cache.py"
   ]
 }
