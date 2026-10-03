@@ -8,13 +8,13 @@
         "slug": "vod2mlib",
         "name": "VOD to Media Library (mwongj fork)",
         "description": "VOD → media library bridge. Generates .strm + NFO files from Dispatcharr's VOD catalogue, with optional cron-driven auto-rescan that picks up newly-added episodes.",
-        "author": "R3XCHRIS",
+        "author": "mwongj",
         "license": "MIT",
         "manifest_url": "https://raw.githubusercontent.com/mwongj/Dispatcharr-Plugins/releases/metadata/vod2mlib/manifest.json",
-        "latest_version": "1.19.0",
-        "latest_url": "vod2mlib-1.19.0/vod2mlib-1.19.0.zip",
-        "latest_sha256": "b6b5cdf53c7a095309fa70bce6f9026e8a31a6b0b27ea2288c136f2196eded5a",
-        "latest_size": 374,
+        "latest_version": "1.20.0",
+        "latest_url": "vod2mlib-1.20.0/vod2mlib-1.20.0.zip",
+        "latest_sha256": "d0db561bded977b041f95615b72d5034b8e40cd4e73c1ed9216b72f6845e1e73",
+        "latest_size": 412,
         "min_dispatcharr_version": "v0.24.0"
       }
     ]
