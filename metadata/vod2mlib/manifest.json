@@ -10,7 +10,7 @@
     "registry_name": "mwongj Plugin Forks",
     "latest": {
       "version": "1.19.0-rc.13",
-      "commit_sha": "e4434dec44b3c4eccb231f57104d07e550b8d094",
+      "commit_sha": "eb8040049e833118e8faad71ec28211e3256f0f8",
       "url": "vod2mlib-1.19.0-rc.13/vod2mlib-1.19.0-rc.13.zip",
       "latest_url": "vod2mlib-1.19.0-rc.13/vod2mlib-1.19.0-rc.13.zip",
       "checksum_sha256": "2f463138c8ab7aa79c1baf4c652269ef7d6ad4eb98fd27d14675558e576bfed4",
@@ -21,7 +21,7 @@
     "versions": [
       {
         "version": "1.19.0-rc.13",
-        "commit_sha": "e4434dec44b3c4eccb231f57104d07e550b8d094",
+        "commit_sha": "eb8040049e833118e8faad71ec28211e3256f0f8",
         "url": "vod2mlib-1.19.0-rc.13/vod2mlib-1.19.0-rc.13.zip",
         "latest_url": "vod2mlib-1.19.0-rc.13/vod2mlib-1.19.0-rc.13.zip",
         "checksum_sha256": "2f463138c8ab7aa79c1baf4c652269ef7d6ad4eb98fd27d14675558e576bfed4",
