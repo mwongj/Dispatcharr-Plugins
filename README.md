@@ -14,9 +14,9 @@ The GitHub repository page is not the JSON feed. Keep the official catalogue ena
 
 | Plugin | Source | Current release |
 | --- | --- | --- |
-| VOD to Media Library | [mwongj/VOD2MLIB](https://github.com/mwongj/VOD2MLIB) | `1.20.1` — stable Save-driven scheduling and database-only metadata filters |
+| VOD to Media Library | [mwongj/VOD2MLIB](https://github.com/mwongj/VOD2MLIB) | `1.20.2-rc.1` — test release for filtered NFO-only cleanup (stable `1.20.1` retained) |
 
-The stable VOD2MLIB package is pinned to tested source from the fork's main branch, including merged PR #4, Save-driven scheduling, and the stable fork identity. Its source SHA is recorded in the definition, feed, and release notes. The release version is written into the packaged manifest and Python class without changing the source fork's release metadata. Original copyright and license information are retained; package metadata identifies mwongj as this fork's maintainer.
+The current RC package is pinned to tested [PR #5](https://github.com/mwongj/VOD2MLIB/pull/5) source for filtered NFO-only archival, with Save-driven scheduling and the stable fork identity. Stable `1.20.1` remains available in version history. Its source SHA is recorded in the definition, feed, and release notes. The release version is written into the packaged manifest and Python class without changing the source fork's release metadata. Original copyright and license information are retained; package metadata identifies mwongj as this fork's maintainer.
 
 VOD2MLIB keeps the identifier **`vod2mlib`** and displays **VOD to Media Library (mwongj fork)**. Install this repository's version over the existing plugin to switch its managed source while keeping the existing settings. It is one installation, so upstream and this fork cannot run as separate plugins. Scheduled tasks keep the existing identities.
 
@@ -45,4 +45,4 @@ ZIPs are written to `dist/`. Publishing locally uses `GH_TOKEN` / `GITHUB_TOKEN`
 
 This is an independent feed named **mwongj Plugin Forks**. Its manifests are unsigned; Dispatcharr reports them as unverified. SHA256 checks detect mismatched downloads but are not signatures.
 
-Earlier VOD2MLIB test releases remain available in the version history. Dispatcharr's current implementation suppresses ordinary update notifications for installations marked as prereleases; refresh this repository and explicitly select stable `1.20.1` when moving from `1.18.1-rc.2`.
+Earlier VOD2MLIB releases remain available in version history. Refresh **mwongj Plugin Forks** and explicitly select `1.20.2-rc.1` to test PR #5. Dispatcharr may suppress ordinary update notifications for installations marked as prereleases; select a version explicitly when needed. The RC preserves settings and keeps the `vod2mlib` plugin identity. Generation applies current filters before batching, removes verified rejected STRMs, and archives confirmed rejected NFO-only folders regardless of NFO generation or ownership/source deletion scope. Preview selective cleanup shows proposals first; scan Emby after generation to clear cached empty items.
