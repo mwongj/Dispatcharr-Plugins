@@ -11,10 +11,10 @@
         "author": "R3XCHRIS",
         "license": "MIT",
         "manifest_url": "https://raw.githubusercontent.com/mwongj/Dispatcharr-Plugins/releases/metadata/vod2mlib/manifest.json",
-        "latest_version": "1.19.0-rc.11",
-        "latest_url": "vod2mlib-1.19.0-rc.11/vod2mlib-1.19.0-rc.11.zip",
-        "latest_sha256": "d5100af1eb82b3cdf9795d9aa82561e2b5e6b3458df7b58d68df4ecc7882147a",
-        "latest_size": 368,
+        "latest_version": "1.19.0-rc.12",
+        "latest_url": "vod2mlib-1.19.0-rc.12/vod2mlib-1.19.0-rc.12.zip",
+        "latest_sha256": "b3b3df533d329003e8005da8ca3a3e6668fbbcf24c0f8b9ab8696c39585cfdcf",
+        "latest_size": 369,
         "min_dispatcharr_version": "v0.24.0"
       }
     ]
