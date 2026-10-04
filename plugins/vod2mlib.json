@@ -1,6 +1,7 @@
 {
   "slug": "vod2mlib",
   "display_name": "VOD to Media Library (mwongj fork)",
+  "author": "mwongj",
   "source_repository": "mwongj/VOD2MLIB",
   "source_commit": "ea2e8b1939c11081127234d4507e430743104e32",
   "version": "1.20.2",
