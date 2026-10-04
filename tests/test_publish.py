@@ -9,14 +9,14 @@ from urllib.error import HTTPError
 import zipfile
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
-from publish import build_package, download, validate_definition
+from publish import build_package, download, set_plugin_attribute, validate_definition
 
 
 def source_archive():
     stream = io.BytesIO()
     files = {
-        "plugin.py": b'class Plugin:\r\n    version = "1.0.0"\r\n    name = "Example"\r\n',
-        "plugin.json": json.dumps({"name": "Example", "version": "1.0.0", "author": "Original", "license": "MIT"}).encode(),
+        "plugin.py": b'# Copyright Original\r\nclass Plugin:\r\n    version = "1.0.0"\r\n    name = "Example"\r\n    help_url = "https://github.com/original/project#readme"\r\n    fields = [{"id": "_about", "description": "Docs: https://github.com/original/project"}]\r\n',
+        "plugin.json": json.dumps({"name": "Example", "version": "1.0.0", "author": "Original", "license": "MIT", "repo_url": "https://github.com/original/project", "fields": [{"id": "_about", "description": "Docs: https://github.com/original/project"}]}).encode(),
         "LICENSE": b"Original license",
     }
     with tarfile.open(fileobj=stream, mode="w:gz") as archive:
@@ -54,6 +54,39 @@ class TestPackages(unittest.TestCase):
         first = build_package(self.definition, archive)[0]
         second = build_package(self.definition, archive)[0]
         self.assertEqual(first, second)
+
+    def test_fork_branding_matches_runtime_and_preserves_attribution(self):
+        self.definition.update(author="mwongj", display_name="Example (mwongj fork)")
+        source = source_archive()
+        package, metadata, contents = build_package(self.definition, source)
+        namespace = {}
+        exec(contents["plugin.py"], namespace)
+        plugin = namespace["Plugin"]
+        self.assertEqual(metadata["author"], "mwongj")
+        self.assertEqual(plugin.name, metadata["name"])
+        self.assertEqual(plugin.help_url, metadata["help_url"])
+        self.assertEqual(plugin.fields, metadata["fields"])
+        self.assertEqual(plugin.fields[0]["description"], "Docs: https://github.com/owner/fork")
+        self.assertEqual(contents["LICENSE"], b"Original license")
+        self.assertEqual(metadata["license"], "MIT")
+        self.assertIn(b"# Copyright Original", contents["plugin.py"])
+        with tarfile.open(fileobj=io.BytesIO(source), mode="r:gz") as archive:
+            original = json.load(archive.extractfile("repo-commit/plugin.json"))
+        self.assertEqual(original["author"], "Original")
+        self.assertEqual(original["repo_url"], "https://github.com/original/project")
+
+    def test_invalid_author_override_is_rejected(self):
+        for author in (None, "", " ", 123):
+            with self.subTest(author=author), self.assertRaises(ValueError):
+                validate_definition({**self.definition, "author": author})
+
+    def test_optional_runtime_help_link_can_be_added(self):
+        source = b'class Plugin:\n    """Original documentation."""\n    name = "Example"'
+        result = set_plugin_attribute(source, "help_url", "https://github.com/owner/fork#readme", allow_missing=True)
+        namespace = {}
+        exec(result, namespace)
+        self.assertEqual(namespace["Plugin"].help_url, "https://github.com/owner/fork#readme")
+        self.assertEqual(namespace["Plugin"].__doc__, "Original documentation.")
 
     def test_fork_display_name_keeps_existing_plugin_identifier(self):
         self.definition["display_name"] = "Example (mwongj fork)"

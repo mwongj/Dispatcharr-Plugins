@@ -86,6 +86,8 @@ def validate_definition(definition):
         raise ValueError("Invalid release version")
     if not isinstance(definition.get("prerelease", False), bool):
         raise ValueError("prerelease must be a boolean")
+    if "author" in definition and (not isinstance(definition["author"], str) or not definition["author"].strip()):
+        raise ValueError("author must be a nonempty string")
     paths = definition["files"]
     if len(paths) != len(set(paths)):
         raise ValueError("Duplicate package file")
@@ -96,7 +98,7 @@ def validate_definition(definition):
         raise ValueError("Package must include plugin.py and plugin.json")
 
 
-def set_plugin_attribute(source, attribute, value):
+def set_plugin_attribute(source, attribute, value, allow_missing=False):
     text = source.decode("utf-8")
     tree = ast.parse(text)
     for node in tree.body:
@@ -111,6 +113,16 @@ def set_plugin_attribute(source, attribute, value):
                     result = "".join(lines).encode("utf-8")
                     compile(result, "plugin.py", "exec")
                     return result
+            if allow_missing:
+                lines = text.splitlines(keepends=True)
+                indent = " " * node.body[0].col_offset
+                ending = "\r\n" if lines[node.lineno - 1].endswith("\r\n") else "\n"
+                if not lines[node.end_lineno - 1].endswith("\n"):
+                    lines[node.end_lineno - 1] += ending
+                lines.insert(node.end_lineno, indent + attribute + " = " + json.dumps(value) + ending)
+                result = "".join(lines).encode("utf-8")
+                compile(result, "plugin.py", "exec")
+                return result
     raise ValueError(f"Could not find Plugin.{attribute}")
 
 
@@ -126,10 +138,20 @@ def build_package(definition, archive):
                 raise ValueError(f"Package entry is not a regular file: {name}")
             contents[name] = source.extractfile(member).read()
     metadata = json.loads(contents["plugin.json"])
+    source_repo_url = metadata.get("repo_url")
     metadata["version"] = definition["version"]
     metadata["repo_url"] = "https://github.com/" + definition["source_repository"]
     metadata["help_url"] = metadata["repo_url"] + "#readme"
+    # Brand the distribution without editing shared source or attribution files.
+    if definition.get("author"):
+        metadata["author"] = definition["author"]
+    if source_repo_url:
+        for field in metadata.get("fields", []):
+            if field.get("id") == "_about" and isinstance(field.get("description"), str):
+                field["description"] = field["description"].replace(source_repo_url, metadata["repo_url"])
+        contents["plugin.py"] = contents["plugin.py"].replace(source_repo_url.encode("utf-8"), metadata["repo_url"].encode("utf-8"))
     contents["plugin.py"] = set_plugin_attribute(contents["plugin.py"], "version", definition["version"])
+    contents["plugin.py"] = set_plugin_attribute(contents["plugin.py"], "help_url", metadata["help_url"], allow_missing=True)
     if definition.get("display_name"):
         metadata["name"] = definition["display_name"]
         contents["plugin.py"] = set_plugin_attribute(contents["plugin.py"], "name", definition["display_name"])
