@@ -9,16 +9,26 @@
     "registry_url": "https://github.com/mwongj/Dispatcharr-Plugins",
     "registry_name": "mwongj Plugin Forks",
     "latest": {
-      "version": "1.21.0-rc.1",
+      "version": "1.21.0",
       "commit_sha": "d5031a4e54fb92d27a2e4fb820baf061b4759d2a",
-      "url": "vod2mlib-1.21.0-rc.1/vod2mlib-1.21.0-rc.1.zip",
-      "latest_url": "vod2mlib-1.21.0-rc.1/vod2mlib-1.21.0-rc.1.zip",
-      "checksum_sha256": "19ad1393c546af85246a710bd7686156001eaef3fbff4a43c8fe865396437480",
+      "url": "vod2mlib-1.21.0/vod2mlib-1.21.0.zip",
+      "latest_url": "vod2mlib-1.21.0/vod2mlib-1.21.0.zip",
+      "checksum_sha256": "fa95e4f24eb30598678b7a14478e3ba239181998ee6e4e9698e68ac88265b1e9",
       "size": 492,
-      "prerelease": true,
+      "prerelease": false,
       "min_dispatcharr_version": "v0.24.0"
     },
     "versions": [
+      {
+        "version": "1.21.0",
+        "commit_sha": "d5031a4e54fb92d27a2e4fb820baf061b4759d2a",
+        "url": "vod2mlib-1.21.0/vod2mlib-1.21.0.zip",
+        "latest_url": "vod2mlib-1.21.0/vod2mlib-1.21.0.zip",
+        "checksum_sha256": "fa95e4f24eb30598678b7a14478e3ba239181998ee6e4e9698e68ac88265b1e9",
+        "size": 492,
+        "prerelease": false,
+        "min_dispatcharr_version": "v0.24.0"
+      },
       {
         "version": "1.21.0-rc.1",
         "commit_sha": "d5031a4e54fb92d27a2e4fb820baf061b4759d2a",
