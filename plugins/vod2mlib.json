@@ -3,10 +3,10 @@
   "display_name": "VOD to Media Library (mwongj fork)",
   "author": "mwongj",
   "source_repository": "mwongj/VOD2MLIB",
-  "source_commit": "d5031a4e54fb92d27a2e4fb820baf061b4759d2a",
-  "version": "1.21.0",
+  "source_commit": "cb373d6c75ed7922c4e502e1bedf5a7f3cbb27aa",
+  "version": "1.21.1",
   "prerelease": false,
-  "release_notes": "Stable promotion of the tested 1.21.0-rc.1 source; no functional code changes. Missing-only Dispatcharr enrichment precedes enabled year/score/genre and title filtering, with independent movie genre rules. Durable source-keyed responses, paced requests, transactional native replay and verified persistence protect output on failed or unresolved enrichment. Missing selected series episode lists are populated before workers; batching, managed filenames and current NFO archival fixes are preserved. Catalogue snapshots are supervised; previews/snapshots can update native metadata and incidental episodes without deleting output. Live validation checked 40 sources with 80 HTTP requests and zero failures; repeat snapshot and cleanup preview reused cached evidence with zero provider requests and zero deletions. Inventory counts and 79 sampled file hashes/timestamps stayed unchanged. All 40 required unknown fields were verified provider omissions; six matching TMDB records independently confirmed the sampled gaps. Successful omission evidence never expires. Future provider corrections or episode additions are not automatically refetched. Prior stable and RC releases remain immutable.",
+  "release_notes": "Fix repeated VOD synchronization while preserving the stable 1.21 enrichment features. Inventory cleanup, filter checks and tracked-source queries now operate only on the configured output roots, preserving independent test/live directories and their ownership records. Repeated series refresh batches advance past unchanged shows and cached-empty episode responses; active workers reserve output slots and missing-episode provider fetches remain bounded by the batch size. Includes regression coverage for changed episode stream IDs/UUIDs, series removals and switching output roots. Validated with 498 passing tests, including pinned minimum/current Dispatcharr native compatibility checks; five platform-specific tests skipped on Windows. Existing settings, plugin identity and prior release packages are preserved. Large cleanup backlogs may require a higher saved action runtime.",
   "files": [
     "plugin.py",
     "plugin.json",
