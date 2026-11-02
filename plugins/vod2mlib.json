@@ -3,10 +3,10 @@
   "display_name": "VOD to Media Library (mwongj fork)",
   "author": "mwongj",
   "source_repository": "mwongj/VOD2MLIB",
-  "source_commit": "cb373d6c75ed7922c4e502e1bedf5a7f3cbb27aa",
-  "version": "1.21.1",
+  "source_commit": "1e1b7412eaa2cb3e309254e6349ec47d0325642a",
+  "version": "1.21.2",
   "prerelease": false,
-  "release_notes": "Fix repeated VOD synchronization while preserving the stable 1.21 enrichment features. Inventory cleanup, filter checks and tracked-source queries now operate only on the configured output roots, preserving independent test/live directories and their ownership records. Repeated series refresh batches advance past unchanged shows and cached-empty episode responses; active workers reserve output slots and missing-episode provider fetches remain bounded by the batch size. Includes regression coverage for changed episode stream IDs/UUIDs, series removals and switching output roots. Validated with 498 passing tests, including pinned minimum/current Dispatcharr native compatibility checks; five platform-specific tests skipped on Windows. Existing settings, plugin identity and prior release packages are preserved. Large cleanup backlogs may require a higher saved action runtime.",
+  "release_notes": "Performance fix for full rescans and series generation on large libraries, preserving the stable 1.21.1 behavior. Finding an episode's existing managed path scanned every tracked series file once per episode (about 44 ms per lookup with ~50k tracked files, growing with library size); it now starts from the indexed provider source and takes about 0.6 ms with identical results. Covered by a query-plan regression test; 497 tests pass. Existing settings, plugin identity and prior release packages are preserved. Large first-time syncs still fetch missing provider metadata once; cached evidence never expires.",
   "files": [
     "plugin.py",
     "plugin.json",
