@@ -3,10 +3,10 @@
   "display_name": "VOD to Media Library (mwongj fork)",
   "author": "mwongj",
   "source_repository": "mwongj/VOD2MLIB",
-  "source_commit": "1e1b7412eaa2cb3e309254e6349ec47d0325642a",
-  "version": "1.21.2",
+  "source_commit": "dab279bcfece35da339de0b8c54d01d3bb80db18",
+  "version": "1.21.3",
   "prerelease": false,
-  "release_notes": "Performance fix for full rescans and series generation on large libraries, preserving the stable 1.21.1 behavior. Finding an episode's existing managed path scanned every tracked series file once per episode (about 44 ms per lookup with ~50k tracked files, growing with library size); it now starts from the indexed provider source and takes about 0.6 ms with identical results. Covered by a query-plan regression test; 497 tests pass. Existing settings, plugin identity and prior release packages are preserved. Large first-time syncs still fetch missing provider metadata once; cached evidence never expires.",
+  "release_notes": "Speeds up large first-time syncs, preserving stable 1.21.2 behavior. Fetching a missing series episode list built a new Xtream client per series, which logged in again before every request: two paced requests per series. The login result is now reused per account credentials, so each fetch is one request at the same spacing, roughly doubling the rate. Every call still carries credentials and the cached login is dropped after any failure. Includes the 1.21.2 fix for slow per-episode inventory lookups. Covered by regression tests; 498 tests pass. Existing settings, plugin identity and prior release packages are preserved.",
   "files": [
     "plugin.py",
     "plugin.json",
